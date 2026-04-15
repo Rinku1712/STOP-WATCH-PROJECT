@@ -1,117 +1,120 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, sans-serif;
 }
 
 body {
-  height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #020617);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #e2e8f0;
+    background: #121212;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #eeeeee;
 }
 
-/* Layout */
-.app {
-  display: flex;
-  gap: 40px;
+.container {
+    width: 380px;
+    background: #1c1c1c;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 20px 20px 60px #080808, -5px -5px 20px #252525;
+    text-align: center;
 }
 
-/* Card */
-.card {
-  background: #0f172a;
-  padding: 30px;
-  border-radius: 20px;
-  width: 280px;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+/* Timer Circle */
+.timer-box {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
 }
 
-h2 {
-  margin-bottom: 20px;
-  font-weight: 500;
+.progress-ring__circle {
+    transition: stroke-dashoffset 0.1s linear;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    stroke-dasharray: 691.15; /* 2 * PI * r */
+    stroke-dashoffset: 691.15;
 }
 
-/* Circle */
-.circle {
-  position: relative;
-  width: 200px;
-  height: 200px;
-  margin: 0 auto 20px;
+.time-display {
+    position: absolute;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -1px;
 }
 
-svg {
-  transform: rotate(-90deg);
-}
-
-circle {
-  fill: none;
-  stroke-width: 8;
-}
-
-circle:first-child {
-  stroke: #1e293b;
-}
-
-#progress {
-  stroke: #38bdf8;
-  stroke-dasharray: 565;
-  stroke-dashoffset: 565;
-  transition: 0.1s linear;
-}
-
-/* Time */
-.time {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  letter-spacing: 1px;
+#ms {
+    font-size: 18px;
+    color: #00adb5;
+    margin-top: 5px;
 }
 
 /* Buttons */
 .controls {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 25px;
 }
 
-button {
-  flex: 1;
-  margin: 5px;
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  font-weight: 500;
+.btn {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #232931;
+    color: white;
 }
 
-#start { background: #22c55e; }
-#lap { background: #3b82f6; color: white; }
-#reset { background: #ef4444; color: white; }
+.btn:active { transform: scale(0.95); }
 
-/* Laps */
-.laps {
-  width: 220px;
-  background: #020617;
-  padding: 20px;
-  border-radius: 20px;
+.start { background: #00adb5; color: #121212; }
+.reset { background: #ff2e63; }
+.lap { background: #393e46; }
+
+/* Laps List */
+.laps-section {
+    border-top: 1px solid #333;
+    padding-top: 15px;
+    text-align: left;
 }
 
-#laps {
-  max-height: 250px;
-  overflow-y: auto;
-  margin-top: 10px;
+.laps-section h3 {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 10px;
+    text-transform: uppercase;
 }
 
-#laps li {
-  list-style: none;
-  padding: 8px;
-  margin-bottom: 6px;
-  background: #1e293b;
-  border-radius: 8px;
-  font-size: 14px;
+#lapsList {
+    max-height: 180px;
+    overflow-y: auto;
+    list-style: none;
 }
+
+#lapsList li {
+    background: #232931;
+    padding: 10px 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar Customization */
+#lapsList::-webkit-scrollbar { width: 4px; }
+#lapsList::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
