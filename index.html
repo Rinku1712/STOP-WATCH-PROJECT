@@ -3,50 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lite Stopwatch Pro</title>
+    <title>Aurora Chrono Pro</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;500;800&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="glass-card">
-        <header>
-            <h1>STOPWATCH</h1>
-            <div class="status-dot"></div>
-        </header>
+    <div class="aurora-bg"></div>
+    
+    <main class="glass-orb">
+        <div class="header-info">
+            <span class="chip">CHRONO PRO</span>
+            <div id="status" class="status-indicator"></div>
+        </div>
 
-        <div class="timer-visual">
-            <svg viewBox="0 0 100 100">
-                <circle class="track" cx="50" cy="50" r="45"></circle>
-                <circle id="progress" class="fill" cx="50" cy="50" r="45"></circle>
+        <div class="display-ring-container">
+            <svg class="ring-svg" viewBox="0 0 100 100">
+                <defs>
+                    <linearGradient id="glow-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00f2fe" />
+                        <stop offset="100%" stop-color="#4facfe" />
+                    </linearGradient>
+                </defs>
+                <circle class="ring-track" cx="50" cy="50" r="48"></circle>
+                <circle id="progress" class="ring-fill" cx="50" cy="50" r="48"></circle>
             </svg>
+            
             <div class="time-readout">
-                <div class="main-time">
+                <div class="digits">
                     <span id="hr">00</span>:<span id="min">00</span>:<span id="sec">00</span>
                 </div>
-                <div id="ms" class="ms-time">00</div>
+                <div id="ms" class="milliseconds">00</div>
             </div>
         </div>
 
-        <div class="controls">
-            <button id="lapBtn" class="btn-circle secondary" title="Lap">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v10l4.5 4.5"/></svg>
-            </button>
-            
-            <button id="startBtn" class="btn-main primary">Start</button>
-            
-            <button id="resetBtn" class="btn-circle danger" title="Reset">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-            </button>
+        <div class="actions">
+            <button id="lapBtn" class="btn-secondary" title="Mark Lap">LAP</button>
+            <button id="startBtn" class="btn-primary">START</button>
+            <button id="resetBtn" class="btn-secondary" title="Reset">RESET</button>
         </div>
 
-        <div class="laps-container">
-            <div class="laps-header">
-                <span>LAP</span>
-                <span>TIME</span>
-            </div>
+        <div class="laps-scroller">
             <ul id="lapsList"></ul>
         </div>
-    </div>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>
