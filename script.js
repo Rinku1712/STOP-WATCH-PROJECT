@@ -2,93 +2,84 @@ let [ms, sec, min, hr] = [0, 0, 0, 0];
 let timer = null;
 let isRunning = false;
 
-const displayHr = document.getElementById('hours');
-const displayMin = document.getElementById('minutes');
-const displaySec = document.getElementById('seconds');
-const displayMs = document.getElementById('ms');
-const progressBar = document.getElementById('progress-bar');
+const startBtn = document.getElementById('startBtn');
+const lapBtn = document.getElementById('lapBtn');
+const resetBtn = document.getElementById('resetBtn');
+const progressBar = document.getElementById('progress');
 const lapsList = document.getElementById('lapsList');
 
-// LocalStorage se puraane laps load karna
-window.onload = () => {
-    const savedLaps = JSON.parse(localStorage.getItem('myLaps')) || [];
-    savedLaps.forEach(lap => renderLap(lap));
-};
+const hrDisplay = document.getElementById('hr');
+const minDisplay = document.getElementById('min');
+const secDisplay = document.getElementById('sec');
+const msDisplay = document.getElementById('ms');
 
 function updateTimer() {
     ms++;
-    if (ms == 100) {
+    if (ms >= 100) {
         ms = 0;
         sec++;
-        if (sec == 60) {
+        if (sec >= 60) {
             sec = 0;
             min++;
-            if (min == 60) {
+            if (min >= 60) {
                 min = 0;
                 hr++;
             }
         }
     }
 
-    // Progress Ring Update (691.15 is the circumference)
-    let offset = 691.15 - (sec / 60) * 691.15;
-    progressBar.style.strokeDashoffset = offset;
+    // Update Text
+    hrDisplay.innerText = hr.toString().padStart(2, '0');
+    minDisplay.innerText = min.toString().padStart(2, '0');
+    secDisplay.innerText = sec.toString().padStart(2, '0');
+    msDisplay.innerText = ms.toString().padStart(2, '0');
 
-    displayHr.innerText = hr.toString().padStart(2, "0");
-    displayMin.innerText = min.toString().padStart(2, "0");
-    displaySec.innerText = sec.toString().padStart(2, "0");
-    displayMs.innerText = ms.toString().padStart(2, "0");
+    // Update Progress Ring (Circumference is ~283)
+    const offset = 283 - (sec / 60) * 283;
+    progressBar.style.strokeDashoffset = offset;
 }
 
-document.getElementById('startBtn').addEventListener('click', () => {
+startBtn.addEventListener('click', () => {
     if (!isRunning) {
         timer = setInterval(updateTimer, 10);
         isRunning = true;
-        document.getElementById('startBtn').innerText = "Pause";
-        document.getElementById('startBtn').style.background = "#ff9800";
+        document.body.classList.add('running');
+        startBtn.innerText = "Pause";
+        startBtn.style.background = "#94a3b8"; // Muted when running
     } else {
         clearInterval(timer);
         isRunning = false;
-        document.getElementById('startBtn').innerText = "Start";
-        document.getElementById('startBtn').style.background = "#00adb5";
+        document.body.classList.remove('running');
+        startBtn.innerText = "Resume";
+        startBtn.style.background = "#2dd4bf"; 
     }
 });
 
-document.getElementById('lapBtn').addEventListener('click', () => {
+lapBtn.addEventListener('click', () => {
     if (isRunning) {
-        const currentLap = `${displayHr.innerText}:${displayMin.innerText}:${displaySec.innerText}.${displayMs.innerText}`;
-        
-        // UI mein add karna
-        renderLap(currentLap);
-        
-        // LocalStorage mein save karna
-        const savedLaps = JSON.parse(localStorage.getItem('myLaps')) || [];
-        savedLaps.push(currentLap);
-        localStorage.setItem('myLaps', JSON.stringify(savedLaps));
+        const lapTime = `${hrDisplay.innerText}:${minDisplay.innerText}:${secDisplay.innerText}.${msDisplay.innerText}`;
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <span style="color: #94a3b8">#${lapsList.children.length + 1}</span>
+            <span>${lapTime}</span>
+        `;
+        lapsList.prepend(li);
     }
 });
 
-function renderLap(timeText) {
-    const li = document.createElement('li');
-    li.innerHTML = `<span>Lap ${lapsList.children.length + 1}</span> <span>${timeText}</span>`;
-    lapsList.prepend(li); // Naya lap sabse upar dikhega
-}
-
-document.getElementById('resetBtn').addEventListener('click', () => {
+resetBtn.addEventListener('click', () => {
     clearInterval(timer);
     isRunning = false;
+    document.body.classList.remove('running');
     [ms, sec, min, hr] = [0, 0, 0, 0];
     
-    displayHr.innerText = "00";
-    displayMin.innerText = "00";
-    displaySec.innerText = "00";
-    displayMs.innerText = "00";
-    progressBar.style.strokeDashoffset = 691.15;
+    hrDisplay.innerText = "00";
+    minDisplay.innerText = "00";
+    secDisplay.innerText = "00";
+    msDisplay.innerText = "00";
     
-    document.getElementById('startBtn').innerText = "Start";
-    document.getElementById('startBtn').style.background = "#00adb5";
-    
-    // Clear Laps from UI and LocalStorage
+    progressBar.style.strokeDashoffset = 283;
+    startBtn.innerText = "Start";
+    startBtn.style.background = "#2dd4bf";
     lapsList.innerHTML = "";
-    localStorage.removeItem('myLaps');
 });
