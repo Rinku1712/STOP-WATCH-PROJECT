@@ -2,56 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Real Watch</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Pro Stopwatch</title>
+  <title>Stopwatch</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="watch">
+<div class="app">
 
-  <h2>STOPWATCH</h2>
+  <h1>Stopwatch</h1>
 
-  <div id="time">
-    <span id="hours">00</span> :
-    <span id="minutes">00</span> :
-    <span id="seconds">00</span> :
+  <div class="display">
+    <span id="hours">00</span>
+    <span class="sep">:</span>
+    <span id="minutes">00</span>
+    <span class="sep">:</span>
+    <span id="seconds">00</span>
+    <span class="sep">.</span>
     <span id="ms">00</span>
   </div>
 
-  <div class="labels">
-    <span>HR</span>
-    <span>MIN</span>
-    <span>SEC</span>
-    <span>MS</span>
-  </div>
-
-  <div class="buttons">
+  <div class="controls">
     <button id="start">Start</button>
     <button id="pause">Pause</button>
     <button id="reset">Reset</button>
   </div>
 
-</div>
+  <div class="laps-container">
+    <h3>Laps</h3>
+    <ul id="laps"></ul>
+  </div>
 
-<script src="script.js"></script>
-</body>
-</html>
-<div class="clock">
-
-  <!-- Hands -->
-  <div class="hand hour" id="hour"></div>
-  <div class="hand minute" id="minute"></div>
-  <div class="hand second" id="second"></div>
-
-  <div class="center"></div>
 </div>
 
 <script src="script.js"></script>
