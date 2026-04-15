@@ -1,32 +1,34 @@
 let hr = 0, min = 0, sec = 0, ms = 0;
 let timer = null;
+let lapCount = 1;
 
 let h = document.getElementById("hours");
 let m = document.getElementById("minutes");
 let s = document.getElementById("seconds");
 let milli = document.getElementById("ms");
+let laps = document.getElementById("laps");
 
 function updateDisplay() {
-  h.innerText = hr < 10 ? "0" + hr : hr;
-  m.innerText = min < 10 ? "0" + min : min;
-  s.innerText = sec < 10 ? "0" + sec : sec;
-  milli.innerText = ms < 10 ? "0" + ms : ms;
+  h.innerText = hr.toString().padStart(2, "0");
+  m.innerText = min.toString().padStart(2, "0");
+  s.innerText = sec.toString().padStart(2, "0");
+  milli.innerText = ms.toString().padStart(2, "0");
 }
 
 function stopwatch() {
   ms++;
 
-  if (ms == 100) {
+  if (ms === 100) {
     ms = 0;
     sec++;
   }
 
-  if (sec == 60) {
+  if (sec === 60) {
     sec = 0;
     min++;
   }
 
-  if (min == 60) {
+  if (min === 60) {
     min = 0;
     hr++;
   }
@@ -36,15 +38,24 @@ function stopwatch() {
 
 /* Start */
 document.getElementById("start").onclick = function () {
-  if (timer == null) {
+  if (timer === null) {
     timer = setInterval(stopwatch, 10);
   }
 };
 
-/* Pause */
+/* Pause + Lap */
 document.getElementById("pause").onclick = function () {
-  clearInterval(timer);
-  timer = null;
+  if (timer !== null) {
+    clearInterval(timer);
+    timer = null;
+
+    let li = document.createElement("li");
+    li.innerHTML = `<span>Lap ${lapCount}</span>
+                    <span>${h.innerText}:${m.innerText}:${s.innerText}.${milli.innerText}</span>`;
+    laps.appendChild(li);
+
+    lapCount++;
+  }
 };
 
 /* Reset */
@@ -53,5 +64,8 @@ document.getElementById("reset").onclick = function () {
   timer = null;
 
   hr = min = sec = ms = 0;
+  lapCount = 1;
+
   updateDisplay();
+  laps.innerHTML = "";
 };
