@@ -22,12 +22,10 @@ function stopwatch() {
     ms = 0;
     sec++;
   }
-
   if (sec === 60) {
     sec = 0;
     min++;
   }
-
   if (min === 60) {
     min = 0;
     hr++;
@@ -37,29 +35,24 @@ function stopwatch() {
 }
 
 /* Start */
-document.getElementById("start").onclick = function () {
+document.getElementById("start").onclick = () => {
   if (timer === null) {
     timer = setInterval(stopwatch, 10);
   }
 };
 
-/* Pause + Lap */
-document.getElementById("pause").onclick = function () {
+/* Lap */
+document.getElementById("pause").onclick = () => {
   if (timer !== null) {
-    clearInterval(timer);
-    timer = null;
-
     let li = document.createElement("li");
-    li.innerHTML = `<span>Lap ${lapCount}</span>
-                    <span>${h.innerText}:${m.innerText}:${s.innerText}.${milli.innerText}</span>`;
+    li.innerText = `Lap ${lapCount}: ${h.innerText}:${m.innerText}:${s.innerText}.${milli.innerText}`;
     laps.appendChild(li);
-
     lapCount++;
   }
 };
 
 /* Reset */
-document.getElementById("reset").onclick = function () {
+document.getElementById("reset").onclick = () => {
   clearInterval(timer);
   timer = null;
 
