@@ -1,50 +1,40 @@
-
 let display = document.getElementById("display");
 let startBtn = document.getElementById("start");
 let resetBtn = document.getElementById("reset");
 
 let hours = 0;
 let minutes = 0;
-let seconds = 0; 
-let timer = null; 
+let seconds = 0;
+let timer = null;
 let running = false;
-function updateDisplay() {
-  let h, m, s;
 
-  if (hours < 10) {
-    h = "0" + hours;
-  } else {
-    h = hours;
-  }
-  if (minutes < 10) {
-    m = "0" + minutes;
-  } else {
-    m = minutes;
-  }
-  if (seconds < 10) {
-    s = "0" + seconds;
-  } else {
-    s = seconds;
-  }
+function updateDisplay() {
+  let h = hours < 10 ? "0" + hours : hours;
+  let m = minutes < 10 ? "0" + minutes : minutes;
+  let s = seconds < 10 ? "0" + seconds : seconds;
+
   display.innerText = h + ":" + m + ":" + s;
 }
+
 function runStopwatch() {
   seconds++;
-  if (seconds == 60) {
+
+  if (seconds === 60) {
     seconds = 0;
     minutes++;
   }
 
-  if (minutes ==60) {
-    minutes = 0;  
+  if (minutes === 60) {
+    minutes = 0;
     hours++;
   }
 
   updateDisplay();
 }
-// Start/Stop button
+
+/* Start / Stop */
 startBtn.onclick = function () {
-  if (running === false) {
+  if (!running) {
     timer = setInterval(runStopwatch, 1000);
     running = true;
     startBtn.innerText = "Stop";
@@ -54,7 +44,8 @@ startBtn.onclick = function () {
     startBtn.innerText = "Start";
   }
 };
-// Reset button
+
+/* Reset */
 resetBtn.onclick = function () {
   clearInterval(timer);
   hours = 0;
