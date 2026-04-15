@@ -1,44 +1,76 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f4f4f4;
+  background: linear-gradient(135deg, #667eea, #764ba2);
   text-align: center;
   margin-top: 100px;
+  height: 100vh;
 }
 
+/* Container Styling */
 .container {
-  background: white;
+  background: rgba(255, 255, 255, 0.15);
   padding: 40px;
-  border-radius: 10px;
+  border-radius: 15px;
   display: inline-block;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  color: white;
 }
 
+/* Timer Display */
 #display {
-  font-size: 48px;
-  margin-bottom: 20px;
+  font-size: 55px;
+  margin-bottom: 25px;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* Buttons Base */
+button {
+  padding: 12px 25px;
+  margin: 8px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
   font-weight: bold;
 }
 
-button {
-  padding: 10px 20px;
-  margin: 5px;
-  font-size: 18px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
+/* Start Button */
 #start {
-  background-color: #4CAF50;
+  background: linear-gradient(45deg, #00c853, #64dd17);
   color: white;
 }
 
+#start:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #00c853;
+}
+
+/* Stop Button */
 #stop {
-  background-color: #f44336;
+  background: linear-gradient(45deg, #ff1744, #ff5252);
   color: white;
 }
 
+#stop:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ff1744;
+}
+
+/* Reset Button */
 #reset {
-  background-color: #2196F3;
+  background: linear-gradient(45deg, #2979ff, #00b0ff);
   color: white;
+}
+
+#reset:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #2979ff;
+}
+
+/* Click Effect */
+button:active {
+  transform: scale(0.95);
 }
