@@ -1,26 +1,57 @@
-let hourHand = document.getElementById("hour");
-let minuteHand = document.getElementById("minute");
-let secondHand = document.getElementById("second");
+let hr = 0, min = 0, sec = 0, ms = 0;
+let timer = null;
 
-function updateClock() {
-  let now = new Date();
+let h = document.getElementById("hours");
+let m = document.getElementById("minutes");
+let s = document.getElementById("seconds");
+let milli = document.getElementById("ms");
 
-  let seconds = now.getSeconds();
-  let minutes = now.getMinutes();
-  let hours = now.getHours();
-
-  // Calculate rotation
-  let secDeg = seconds * 6;
-  let minDeg = minutes * 6 + seconds * 0.1;
-  let hrDeg = hours * 30 + minutes * 0.5;
-
-  secondHand.style.transform = `translateX(-50%) rotate(${secDeg}deg)`;
-  minuteHand.style.transform = `translateX(-50%) rotate(${minDeg}deg)`;
-  hourHand.style.transform = `translateX(-50%) rotate(${hrDeg}deg)`;
+function updateDisplay() {
+  h.innerText = hr < 10 ? "0" + hr : hr;
+  m.innerText = min < 10 ? "0" + min : min;
+  s.innerText = sec < 10 ? "0" + sec : sec;
+  milli.innerText = ms < 10 ? "0" + ms : ms;
 }
 
-// Run every second
-setInterval(updateClock, 1000);
+function stopwatch() {
+  ms++;
 
-// Initial call
-updateClock();
+  if (ms == 100) {
+    ms = 0;
+    sec++;
+  }
+
+  if (sec == 60) {
+    sec = 0;
+    min++;
+  }
+
+  if (min == 60) {
+    min = 0;
+    hr++;
+  }
+
+  updateDisplay();
+}
+
+/* Start */
+document.getElementById("start").onclick = function () {
+  if (timer == null) {
+    timer = setInterval(stopwatch, 10);
+  }
+};
+
+/* Pause */
+document.getElementById("pause").onclick = function () {
+  clearInterval(timer);
+  timer = null;
+};
+
+/* Reset */
+document.getElementById("reset").onclick = function () {
+  clearInterval(timer);
+  timer = null;
+
+  hr = min = sec = ms = 0;
+  updateDisplay();
+};
