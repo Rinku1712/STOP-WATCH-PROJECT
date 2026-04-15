@@ -3,30 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ultimate Pro Stopwatch</title>
+    <title>Lite Stopwatch Pro</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
-        <div class="timer-box">
-            <svg class="progress-ring" width="240" height="240">
-                <circle class="progress-ring__circle-bg" stroke="#232931" stroke-width="8" fill="transparent" r="110" cx="120" cy="120"/>
-                <circle id="progress-bar" class="progress-ring__circle" stroke="#00adb5" stroke-width="8" stroke-linecap="round" fill="transparent" r="110" cx="120" cy="120"/>
+    <div class="glass-card">
+        <header>
+            <h1>STOPWATCH</h1>
+            <div class="status-dot"></div>
+        </header>
+
+        <div class="timer-visual">
+            <svg viewBox="0 0 100 100">
+                <circle class="track" cx="50" cy="50" r="45"></circle>
+                <circle id="progress" class="fill" cx="50" cy="50" r="45"></circle>
             </svg>
-            <div class="time-display">
-                <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
-                <div id="ms">00</div>
+            <div class="time-readout">
+                <div class="main-time">
+                    <span id="hr">00</span>:<span id="min">00</span>:<span id="sec">00</span>
+                </div>
+                <div id="ms" class="ms-time">00</div>
             </div>
         </div>
 
         <div class="controls">
-            <button id="startBtn" class="btn start">Start</button>
-            <button id="lapBtn" class="btn lap">Lap</button>
-            <button id="resetBtn" class="btn reset">Reset</button>
+            <button id="lapBtn" class="btn-circle secondary" title="Lap">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v10l4.5 4.5"/></svg>
+            </button>
+            
+            <button id="startBtn" class="btn-main primary">Start</button>
+            
+            <button id="resetBtn" class="btn-circle danger" title="Reset">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            </button>
         </div>
 
-        <div class="laps-section">
-            <h3>Recordings</h3>
+        <div class="laps-container">
+            <div class="laps-header">
+                <span>LAP</span>
+                <span>TIME</span>
+            </div>
             <ul id="lapsList"></ul>
         </div>
     </div>
