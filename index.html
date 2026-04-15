@@ -2,32 +2,32 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Stopwatch</title>
+  <title>Modern Stopwatch</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
+<div class="wrapper">
 
-  <h1>Stopwatch</h1>
+  <div class="stopwatch">
+    <h2>Stopwatch</h2>
 
-  <div class="display">
-    <span id="hours">00</span>
-    <span class="sep">:</span>
-    <span id="minutes">00</span>
-    <span class="sep">:</span>
-    <span id="seconds">00</span>
-    <span class="sep">.</span>
-    <span id="ms">00</span>
+    <div class="time">
+      <span id="hours">00</span>:
+      <span id="minutes">00</span>:
+      <span id="seconds">00</span>.
+      <span id="ms">00</span>
+    </div>
+
+    <div class="controls">
+      <button id="start">Start</button>
+      <button id="pause">Lap</button>
+      <button id="reset">Reset</button>
+    </div>
   </div>
 
-  <div class="controls">
-    <button id="start">Start</button>
-    <button id="pause">Pause</button>
-    <button id="reset">Reset</button>
-  </div>
-
-  <div class="laps-container">
+  <!-- Side Lap Panel -->
+  <div class="laps-panel">
     <h3>Laps</h3>
     <ul id="laps"></ul>
   </div>
