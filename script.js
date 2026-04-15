@@ -3,83 +3,61 @@ let timer = null;
 let isRunning = false;
 
 const startBtn = document.getElementById('startBtn');
-const lapBtn = document.getElementById('lapBtn');
-const resetBtn = document.getElementById('resetBtn');
 const progressBar = document.getElementById('progress');
 const lapsList = document.getElementById('lapsList');
+const container = document.querySelector('.glass-orb');
 
-const hrDisplay = document.getElementById('hr');
-const minDisplay = document.getElementById('min');
-const secDisplay = document.getElementById('sec');
-const msDisplay = document.getElementById('ms');
-
-function updateTimer() {
+function updateDisplay() {
     ms++;
-    if (ms >= 100) {
-        ms = 0;
-        sec++;
-        if (sec >= 60) {
-            sec = 0;
-            min++;
-            if (min >= 60) {
-                min = 0;
-                hr++;
-            }
+    if (ms >= 100) { ms = 0; sec++;
+        if (sec >= 60) { sec = 0; min++;
+            if (min >= 60) { min = 0; hr++; }
         }
     }
+    
+    document.getElementById('hr').innerText = hr.toString().padStart(2, '0');
+    document.getElementById('min').innerText = min.toString().padStart(2, '0');
+    document.getElementById('sec').innerText = sec.toString().padStart(2, '0');
+    document.getElementById('ms').innerText = ms.toString().padStart(2, '0');
 
-    // Update Text
-    hrDisplay.innerText = hr.toString().padStart(2, '0');
-    minDisplay.innerText = min.toString().padStart(2, '0');
-    secDisplay.innerText = sec.toString().padStart(2, '0');
-    msDisplay.innerText = ms.toString().padStart(2, '0');
-
-    // Update Progress Ring (Circumference is ~283)
-    const offset = 283 - (sec / 60) * 283;
+    // Smooth Ring Update (Circumference 301.5)
+    const offset = 301.5 - (sec / 60) * 301.5;
     progressBar.style.strokeDashoffset = offset;
 }
 
 startBtn.addEventListener('click', () => {
     if (!isRunning) {
-        timer = setInterval(updateTimer, 10);
+        timer = setInterval(updateDisplay, 10);
         isRunning = true;
-        document.body.classList.add('running');
-        startBtn.innerText = "Pause";
-        startBtn.style.background = "#94a3b8"; // Muted when running
+        container.classList.add('running');
+        startBtn.innerText = "PAUSE";
+        startBtn.style.background = "#4facfe"; 
     } else {
         clearInterval(timer);
         isRunning = false;
-        document.body.classList.remove('running');
-        startBtn.innerText = "Resume";
-        startBtn.style.background = "#2dd4bf"; 
+        container.classList.remove('running');
+        startBtn.innerText = "RESUME";
+        startBtn.style.background = "#1a202c";
     }
 });
 
-lapBtn.addEventListener('click', () => {
+document.getElementById('lapBtn').addEventListener('click', () => {
     if (isRunning) {
-        const lapTime = `${hrDisplay.innerText}:${minDisplay.innerText}:${secDisplay.innerText}.${msDisplay.innerText}`;
         const li = document.createElement('li');
-        li.innerHTML = `
-            <span style="color: #94a3b8">#${lapsList.children.length + 1}</span>
-            <span>${lapTime}</span>
-        `;
+        li.innerHTML = `<span style="opacity:0.4; font-weight:800">#${lapsList.children.length + 1}</span> 
+                        <span style="font-family: 'JetBrains Mono'">${hr}:${min}:${sec}.${ms}</span>`;
         lapsList.prepend(li);
     }
 });
 
-resetBtn.addEventListener('click', () => {
+document.getElementById('resetBtn').addEventListener('click', () => {
     clearInterval(timer);
     isRunning = false;
-    document.body.classList.remove('running');
     [ms, sec, min, hr] = [0, 0, 0, 0];
-    
-    hrDisplay.innerText = "00";
-    minDisplay.innerText = "00";
-    secDisplay.innerText = "00";
-    msDisplay.innerText = "00";
-    
-    progressBar.style.strokeDashoffset = 283;
-    startBtn.innerText = "Start";
-    startBtn.style.background = "#2dd4bf";
+    document.querySelectorAll('.digits span, .milliseconds').forEach(s => s.innerText = "00");
+    progressBar.style.strokeDashoffset = 301.5;
+    startBtn.innerText = "START";
+    startBtn.style.background = "#1a202c";
+    container.classList.remove('running');
     lapsList.innerHTML = "";
 });
