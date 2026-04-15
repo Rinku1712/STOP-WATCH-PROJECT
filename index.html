@@ -2,32 +2,43 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Modern Stopwatch</title>
+  <title>Pro Stopwatch</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="wrapper">
+<div class="app">
 
-  <div class="stopwatch">
+  <div class="card">
+
     <h2>Stopwatch</h2>
 
-    <div class="time">
-      <span id="hours">00</span>:
-      <span id="minutes">00</span>:
-      <span id="seconds">00</span>.
-      <span id="ms">00</span>
+    <!-- Circle -->
+    <div class="circle">
+      <svg>
+        <circle cx="100" cy="100" r="90"></circle>
+        <circle cx="100" cy="100" r="90" id="progress"></circle>
+      </svg>
+
+      <div class="time">
+        <span id="hours">00</span>:
+        <span id="minutes">00</span>:
+        <span id="seconds">00</span>.
+        <span id="ms">00</span>
+      </div>
     </div>
 
+    <!-- Buttons -->
     <div class="controls">
       <button id="start">Start</button>
-      <button id="pause">Lap</button>
+      <button id="lap">Lap</button>
       <button id="reset">Reset</button>
     </div>
+
   </div>
 
-  <!-- Side Lap Panel -->
-  <div class="laps-panel">
+  <!-- Laps -->
+  <div class="laps">
     <h3>Laps</h3>
     <ul id="laps"></ul>
   </div>
