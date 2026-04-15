@@ -1,149 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Realistic Watch</title>
-
-<style>
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  text-align: center;
+  margin-top: 100px;
   height: 100vh;
-  background: radial-gradient(circle, #1a1a1a, #000);
 }
 
-/* Watch Outer */
-.clock {
-  width: 300px;
-  height: 300px;
-  border: 12px solid #222;
-  border-radius: 50%;
-  position: relative;
-  background: radial-gradient(#fff, #ddd);
-  box-shadow: 
-    inset 0 0 20px rgba(0,0,0,0.5),
-    0 10px 30px rgba(0,0,0,0.8);
+/* Container Styling */
+.container {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 40px;
+  border-radius: 15px;
+  display: inline-block;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  color: white;
 }
 
-/* Center Dot */
-.center {
-  width: 15px;
-  height: 15px;
-  background: black;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 10;
-}
-
-/* Hands Base */
-.hand {
-  position: absolute;
-  bottom: 50%;
-  left: 50%;
-  transform-origin: bottom;
-  transform: translateX(-50%) rotate(90deg);
-}
-
-/* Hour Hand */
-.hour {
-  width: 6px;
-  height: 70px;
-  background: black;
-  border-radius: 5px;
-}
-
-/* Minute Hand */
-.minute {
-  width: 4px;
-  height: 100px;
-  background: #333;
-  border-radius: 5px;
-}
-
-/* Second Hand */
-.second {
-  width: 2px;
-  height: 120px;
-  background: red;
-}
-
-/* Numbers */
-.number {
-  position: absolute;
-  font-size: 20px;
+/* Timer Display */
+#display {
+  font-size: 55px;
+  margin-bottom: 25px;
   font-weight: bold;
-  color: black;
+  letter-spacing: 2px;
 }
 
-/* Position Numbers */
-.number1 { top: 20px; left: 70%; }
-.number2 { top: 60px; left: 85%; }
-.number3 { top: 50%; right: 10px; transform: translateY(-50%); }
-.number4 { bottom: 60px; left: 85%; }
-.number5 { bottom: 20px; left: 70%; }
-.number6 { bottom: 10px; left: 50%; transform: translateX(-50%); }
-.number7 { bottom: 20px; left: 25%; }
-.number8 { bottom: 60px; left: 5%; }
-.number9 { top: 50%; left: 10px; transform: translateY(-50%); }
-.number10 { top: 60px; left: 5%; }
-.number11 { top: 20px; left: 25%; }
-.number12 { top: 5px; left: 50%; transform: translateX(-50%); }
-
-</style>
-</head>
-
-<body>
-
-<div class="clock">
-  <div class="number number1">1</div>
-  <div class="number number2">2</div>
-  <div class="number number3">3</div>
-  <div class="number number4">4</div>
-  <div class="number number5">5</div>
-  <div class="number number6">6</div>
-  <div class="number number7">7</div>
-  <div class="number number8">8</div>
-  <div class="number number9">9</div>
-  <div class="number number10">10</div>
-  <div class="number number11">11</div>
-  <div class="number number12">12</div>
-
-  <div class="hand hour" id="hour"></div>
-  <div class="hand minute" id="minute"></div>
-  <div class="hand second" id="second"></div>
-
-  <div class="center"></div>
-</div>
-
-<script>
-function updateClock() {
-  const now = new Date();
-
-  const seconds = now.getSeconds();
-  const minutes = now.getMinutes();
-  const hours = now.getHours();
-
-  const secondDeg = seconds * 6;
-  const minuteDeg = minutes * 6 + seconds * 0.1;
-  const hourDeg = hours * 30 + minutes * 0.5;
-
-  document.getElementById("second").style.transform =
-    `translateX(-50%) rotate(${secondDeg}deg)`;
-
-  document.getElementById("minute").style.transform =
-    `translateX(-50%) rotate(${minuteDeg}deg)`;
-
-  document.getElementById("hour").style.transform =
-    `translateX(-50%) rotate(${hourDeg}deg)`;
+/* Buttons Base */
+button {
+  padding: 12px 25px;
+  margin: 8px;
+  font-size: 18px;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
 }
 
-setInterval(updateClock, 1000);
-updateClock();
-</script>
+/* Start Button */
+#start {
+  background: linear-gradient(45deg, #00c853, #64dd17);
+  color: white;
+}
 
-</body>
-</html>
+#start:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #00c853;
+}
+
+/* Stop Button */
+#stop {
+  background: linear-gradient(45deg, #ff1744, #ff5252);
+  color: white;
+}
+
+#stop:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #ff1744;
+}
+
+/* Reset Button */
+#reset {
+  background: linear-gradient(45deg, #2979ff, #00b0ff);
+  color: white;
+}
+
+#reset:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #2979ff;
+}
+
+/* Click Effect */
+button:active {
+  transform: scale(0.95);
+}
