@@ -1,50 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Pro Stopwatch</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Pro Stopwatch</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <div class="timer-box">
+            <svg class="progress-ring" width="240" height="240">
+                <circle class="progress-ring__circle-bg" stroke="#232931" stroke-width="8" fill="transparent" r="110" cx="120" cy="120"/>
+                <circle id="progress-bar" class="progress-ring__circle" stroke="#00adb5" stroke-width="8" stroke-linecap="round" fill="transparent" r="110" cx="120" cy="120"/>
+            </svg>
+            <div class="time-display">
+                <span id="hours">00</span>:<span id="minutes">00</span>:<span id="seconds">00</span>
+                <div id="ms">00</div>
+            </div>
+        </div>
 
-<div class="app">
+        <div class="controls">
+            <button id="startBtn" class="btn start">Start</button>
+            <button id="lapBtn" class="btn lap">Lap</button>
+            <button id="resetBtn" class="btn reset">Reset</button>
+        </div>
 
-  <div class="card">
-
-    <h2>Stopwatch</h2>
-
-    <!-- Circle -->
-    <div class="circle">
-      <svg>
-        <circle cx="100" cy="100" r="90"></circle>
-        <circle cx="100" cy="100" r="90" id="progress"></circle>
-      </svg>
-
-      <div class="time">
-        <span id="hours">00</span>:
-        <span id="minutes">00</span>:
-        <span id="seconds">00</span>.
-        <span id="ms">00</span>
-      </div>
+        <div class="laps-section">
+            <h3>Recordings</h3>
+            <ul id="lapsList"></ul>
+        </div>
     </div>
-
-    <!-- Buttons -->
-    <div class="controls">
-      <button id="start">Start</button>
-      <button id="lap">Lap</button>
-      <button id="reset">Reset</button>
-    </div>
-
-  </div>
-
-  <!-- Laps -->
-  <div class="laps">
-    <h3>Laps</h3>
-    <ul id="laps"></ul>
-  </div>
-
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
